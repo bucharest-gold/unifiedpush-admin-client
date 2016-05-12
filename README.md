@@ -8,6 +8,31 @@ A client for connecting to the AeroGear UnifiedPush servers admin REST API - htt
 
 http://bucharest-gold.github.io/unifiedpush-admin-client/
 
+
+## Example
+
+    'use strict';
+
+    let adminClient = require('unifiedpush-admin-client');
+
+    let baseUrl = 'http://127.0.0.1:8080/ag-push';
+
+    let settings = {
+        username: 'admin',
+        password: 'admin'
+    };
+
+    adminClient(baseUrl, settings)
+      .then((client) => {
+        return client.applications.find()
+          .then((applications) => {
+            console.log('applications', applications);
+          });
+      })
+      .catch((err) => {
+        console.log('Error', err);
+      });
+
 ### Server Setup
 
 At the moment, you must enable "Direct Access Grants" on the UnifiedPush Server for this to work
