@@ -1,0 +1,12 @@
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+  - "5"
+script:
+   - make ci
+notifications:
+  irc: "irc.freenode.org#brass-monkey"
+branches:
+  only:
+    - master
