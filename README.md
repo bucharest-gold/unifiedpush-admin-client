@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/bucharest-gold/unifiedpush-admin-client.svg?branch=master)](https://travis-ci.org/bucharest-gold/unifiedpush-admin-client)
+[![Build Status](https://travis-ci.org/bucharest-gold/unifiedpush-admin-client.svg?branch=master)](https://travis-ci.org/bucharest-gold/unifiedpush-admin-client) [![Coverage Status](https://coveralls.io/repos/github/bucharest-gold/unifiedpush-admin-client/badge.svg?branch=master)](https://coveralls.io/github/bucharest-gold/unifiedpush-admin-client?branch=master)
 
 ## Unified Push Admin Client
 
