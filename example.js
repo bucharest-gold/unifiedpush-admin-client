@@ -11,7 +11,7 @@ let settings = {
 
 adminClient(baseUrl, settings)
   .then((client) => {
-    return client.applications.create({name: 'anotherone'})
+    return client.applications.find()
       .then((applications) => {
         console.log('applications', applications);
       });
