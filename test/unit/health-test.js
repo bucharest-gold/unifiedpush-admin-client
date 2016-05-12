@@ -58,7 +58,26 @@ test('test successful health endpoint', (t) => {
       .reply(200, healthEndpointResult);
 
     // If successful, the server returns a 200 with an array of push applications
-    client.health().then((applications) => {
+    client.health().then((healthdata) => {
+      t.end();
+    });
+  });
+});
+
+test('test error with health endpoint', (t) => {
+
+  const upsClient = adminClient(baseUrl, settings);
+
+  upsClient.then((client) => {
+    t.equal(typeof client.health, 'function', 'The client object should have a client.health function');
+
+    nock('http://127.0.0.1:8080')
+      .matchHeader('authorization', 'Bearer access token')
+      .get('/ag-push/rest/sys/info/health')
+      .reply(400, {});
+
+    // If successful, the server returns a 200 with an array of push applications
+    client.health().catch(() => {
       t.end();
     });
   });
