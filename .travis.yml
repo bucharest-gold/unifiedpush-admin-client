@@ -3,8 +3,14 @@ dist: trusty
 language: node_js
 node_js:
   - "5"
+before_script:
+  - ./build/start-kc-server.sh
+  - ./build/start-server.sh
 script:
    - make ci
+after_script:
+  - ./build/stop-kc-server.sh
+  - ./build/stop-server.sh
 notifications:
   irc: "irc.freenode.org#brass-monkey"
 branches:
