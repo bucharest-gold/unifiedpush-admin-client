@@ -74,13 +74,119 @@ test('create application - success', (t) => {
     });
 });
 
-test('create application - failure', (t) => {
+test('create application - failure - missing name field', (t) => {
     const upsClient = adminClient(baseUrl, settings);
 
     upsClient.then((client) => {
         client.applications.create({description: 'Cool Description'}).catch((error) => {
             t.equal(error.name, 'may not be null', 'should have an error for name beining needed');
             t.end();
+        });
+    });
+});
+
+
+test('update application - success', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+        client.applications.create({name: 'Test Update', description: 'Cool Description'}).then((application) => {
+
+            application.name = 'Been Updated';
+            application.description = 'Updated Description';
+            return client.applications.update(application).then(() => {
+                // Push Applications update doesn't return anything for an update
+                t.pass();
+
+                client.applications.remove(application.pushApplicationID);
+                t.end();
+            });
+        });
+    });
+});
+
+
+test('update application - failure - no name in the updated value', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+        client.applications.create({name: 'Test Update 2'}).then((application) => {
+
+            delete application.name;
+            application.description = 'Updated Description';
+            return client.applications.update(application).catch((error) => {
+                t.equal(error.name, 'may not be null', 'should have an error for name beining needed');
+
+                client.applications.remove(application.pushApplicationID);
+                t.end();
+            });
+        });
+    });
+});
+
+
+test('update application - failure - no pushApplicationId in the updated value', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+        client.applications.create({name: 'Test Update 2'}).then((application) => {
+
+            delete application.pushApplicationID;
+            application.description = 'Updated Description';
+            return client.applications.update(application).catch((error) => {
+                t.equal(error, 'Could not find requested PushApplicationEntity', 'pushApplicationID needed');
+
+                client.applications.remove(application.pushApplicationID);
+                t.end();
+            });
+        });
+    });
+});
+
+test('remove application - sucess', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+        client.applications.create({name: 'Test Delete 1'}).then((application) => {
+            return client.applications.remove(application.pushApplicationID).then(() => {
+                t.end();
+            });
+        });
+    });
+});
+
+
+
+test('remove application - failure - wrong pushApplicationID', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+        client.applications.create({name: 'Test Delete 2'}).then((application) => {
+            const pushAppId = application.pushApplicationID;
+            delete application.pushApplicationID;
+            return client.applications.remove(application.pushApplicationID).catch((error) => {
+                 t.equal(error, 'Could not find requested PushApplicationEntity', 'pushApplicationID needed');
+
+                //clean up
+                client.applications.remove(pushAppId);
+                t.end();
+            });
+        });
+    });
+});
+
+test('reset application secret - sucess', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+        client.applications.create({name: 'Test Secret 1'}).then((application) => {
+            return client.applications.reset(application.pushApplicationID).then((updatedSecret) => {
+                t.notEqual(application.masterSecret, updatedSecret.masterSecret, 'master secrets should be different');
+
+                //clean up
+                client.applications.remove(application.pushApplicationID);
+                t.end();
+            });
         });
     });
 });
