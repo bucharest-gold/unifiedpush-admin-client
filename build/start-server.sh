@@ -20,6 +20,24 @@ function waitForServer {
   done
 }
 
+function waitForUPS {
+  # Give the server some time to start up. Look for a well-known
+  # bit of text in the log file. Try at most 50 times before giving up.
+  C=50
+  while [ $C -gt 0 ]
+  do
+    grep "Deployed \"ag-push.war\" (runtime-name : \"ag-push.war\")" wildfly.log
+    if [ $? -eq 0 ]; then
+      echo "Server started."
+      C=0
+    else
+      echo -n "."
+      C=$(( $C - 1 ))
+    fi
+    sleep 1
+  done
+}
+
 WF="${WILDFLY}.tar.gz"
 WILDFLY_URL="http://downloads.jboss.org/wildfly/${WILDFLYVERSION}/${WF}"
 
@@ -72,4 +90,4 @@ $WILDFLY/bin/jboss-cli.sh -c --controller=localhost:9992 --command="/system-prop
 
 ## Then add the UPS war
 mv $UPS_WAR $WILDFLY/standalone/deployments
-waitForServer
+waitForUPS
