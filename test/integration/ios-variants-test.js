@@ -165,7 +165,7 @@ test('iOS variant update - success as a read stream', (t) => {
                 name: 'Updated iOS Variant',
                 type: 'ios',
                 ios: {
-                    certificate: __dirname + '/../../build/test-ios-cert.p12',
+                    certificate: fs.createReadStream(__dirname + '/../../build/test-ios-cert.p12'),
                     passphrase: 'redhat',
                     production: 'true'
                 }
