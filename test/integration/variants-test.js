@@ -172,6 +172,70 @@ test('iOS variant find one with variant ID - success', (t) => {
     });
 });
 
+test('iOS variant remove - success', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For iOS Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'iOS Variant',
+            type: 'ios',
+            ios: {
+                certificate: __dirname + '/../../build/test-ios-cert.p12',
+                passphrase: 'redhat'
+            }
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            const variantToRemove = {
+                pushAppId: application.pushApplicationID,
+                type: 'ios',
+                variantId: variant.variantID
+            };
+            return client.variants.remove(variantToRemove);
+        }).then(() => {
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
+test('iOS variant remove - error - wrong variantID', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For iOS Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'iOS Variant',
+            type: 'ios',
+            ios: {
+                certificate: __dirname + '/../../build/test-ios-cert.p12',
+                passphrase: 'redhat'
+            }
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            const variantToRemove = {
+                pushAppId: application.pushApplicationID,
+                type: 'ios',
+                variantId: 'NOT_RIGHT'
+            };
+            return client.variants.remove(variantToRemove);
+        }).catch((err) => {
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
 /**
  Android Variant Tests
 */
@@ -295,6 +359,70 @@ test('Android Variant find one with variant ID - success', (t) => {
             t.equal(androidVariant.name, 'Android Variant', 'name should be iOS Variant');
             t.equal(androidVariant.type, 'android', 'should be the android type');
             t.equal(Array.isArray(androidVariant), false, 'the return value should be an array');
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
+test('Android Variant remove - success', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For Android Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'Android Variant',
+            type: 'android',
+            android: {
+                googleKey: 'abcd-1234',
+                'projectNumber': '1234567'
+            }
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            const variantToRemove = {
+                pushAppId: application.pushApplicationID,
+                type: 'android',
+                variantId: variant.variantID
+            };
+            return client.variants.remove(variantToRemove);
+        }).then(() => {
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
+test('Android Variant remove - error - wrong variantID', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For Android Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'Android Variant',
+            type: 'android',
+            android: {
+                googleKey: 'abcd-1234',
+                'projectNumber': '1234567'
+            }
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            const variantToRemove = {
+                pushAppId: application.pushApplicationID,
+                type: 'android',
+                variantId: 'NOT_RIGHT'
+            };
+            return client.variants.remove(variantToRemove);
+        }).catch((err) => {
             // now remove the thing we created,  we will test delete later on
             client.applications.remove(application.pushApplicationID);
             t.end();
@@ -432,6 +560,70 @@ test('ADM Variant find one with variant ID - success', (t) => {
     });
 });
 
+test('ADM Variant remove - success', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For ADM Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'ADM Variant',
+            type: 'adm',
+            adm: {
+                clientId: 'abcd-1234',
+                clientSecret: '1234567'
+            }
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            const variantToRemove = {
+                pushAppId: application.pushApplicationID,
+                type: 'adm',
+                variantId: variant.variantID
+            };
+            return client.variants.remove(variantToRemove);
+        }).then(() => {
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
+test('ADM Variant remove - error - wrong variantID', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For ADM Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'ADM Variant',
+            type: 'adm',
+            adm: {
+                clientId: 'abcd-1234',
+                clientSecret: '1234567'
+            }
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            const variantToRemove = {
+                pushAppId: application.pushApplicationID,
+                type: 'adm',
+                variantId: 'NOT_RIGHT'
+            };
+            return client.variants.remove(variantToRemove);
+        }).catch((err) => {
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
 /**
  SimplePush Variant Tests
 */
@@ -513,6 +705,62 @@ test('SimplePush find one with variant ID - success', (t) => {
             t.equal(simplePushVariant.name, 'SimplePush', 'name should be iOS Variant');
             t.equal(simplePushVariant.type, 'simplePush', 'should be the simplePush type');
             t.equal(Array.isArray(simplePushVariant), false, 'the return value should be an array');
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
+test('SimplePush remove - success', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For SimplePush'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'SimplePush',
+            type: 'simplePush'
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            const variantToRemove = {
+                pushAppId: application.pushApplicationID,
+                type: 'simplePush',
+                variantId: variant.variantID
+            };
+            return client.variants.remove(variantToRemove);
+        }).then(() => {
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
+test('SimplePush remove - error - wrong variantID', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For SimplePush'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'SimplePush',
+            type: 'simplePush'
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            const variantToRemove = {
+                pushAppId: application.pushApplicationID,
+                type: 'simplePush',
+                variantId: 'NOT_RIGHT'
+            };
+            return client.variants.remove(variantToRemove);
+        }).catch((err) => {
             // now remove the thing we created,  we will test delete later on
             client.applications.remove(application.pushApplicationID);
             t.end();
