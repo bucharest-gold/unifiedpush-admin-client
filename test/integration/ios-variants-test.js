@@ -102,6 +102,126 @@ test('iOS variant create - fail on cert/passphrase miss match', (t) => {
     });
 });
 
+test('iOS variant update - success', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For iOS Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'iOS Variant',
+            type: 'ios',
+            ios: {
+                certificate: __dirname + '/../../build/test-ios-cert.p12',
+                passphrase: 'redhat'
+            }
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            const variantOptions = {
+                pushAppId: application.pushApplicationID,
+                variantId: variant.variantID,
+                name: 'Updated iOS Variant',
+                type: 'ios',
+                ios: {
+                    certificate: __dirname + '/../../build/test-ios-cert.p12',
+                    passphrase: 'redhat',
+                    production: 'true'
+                }
+            };
+            return client.variants.update(variantOptions);
+        }).then((updateVariant) => {
+            t.equal(updateVariant.name, 'Updated iOS Variant', 'name should be iOS Variant');
+            t.equal(updateVariant.production, true, 'production should be false');
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
+test('iOS variant update - success as a read stream', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For iOS Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'iOS Variant',
+            type: 'ios',
+            ios: {
+                certificate: fs.createReadStream(__dirname + '/../../build/test-ios-cert.p12'),
+                passphrase: 'redhat'
+            }
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            const variantOptions = {
+                pushAppId: application.pushApplicationID,
+                variantId: variant.variantID,
+                name: 'Updated iOS Variant',
+                type: 'ios',
+                ios: {
+                    certificate: __dirname + '/../../build/test-ios-cert.p12',
+                    passphrase: 'redhat',
+                    production: 'true'
+                }
+            };
+            return client.variants.update(variantOptions);
+        }).then((updateVariant) => {
+            t.equal(updateVariant.name, 'Updated iOS Variant', 'name should be iOS Variant');
+            t.equal(updateVariant.production, true, 'production should be false');
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
+test('iOS variant update - failure with wrong passphrase', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For iOS Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'iOS Variant',
+            type: 'ios',
+            ios: {
+                certificate: fs.createReadStream(__dirname + '/../../build/test-ios-cert.p12'),
+                passphrase: 'not right'
+            }
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            const variantOptions = {
+                pushAppId: application.pushApplicationID,
+                variantId: variant.variantID,
+                name: 'Updated iOS Variant',
+                type: 'ios',
+                ios: {
+                    certificate: __dirname + '/../../build/test-ios-cert.p12',
+                    passphrase: 'redhat',
+                    production: 'true'
+                }
+            };
+            return client.variants.update(variantOptions);
+        }).catch((err) => {
+            t.ok(err.certificatePassphraseValid, 'should have this error');
+            t.equal(err.certificatePassphraseValid, 'the provided certificate passphrase does not match with the uploaded certificate', 'the provided certificate passphrase does not match with the uploaded certificate');
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
 test('iOS variant find all - success', (t) => {
     const upsClient = adminClient(baseUrl, settings);
 
