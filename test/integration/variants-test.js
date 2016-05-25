@@ -297,6 +297,86 @@ test('Android variant create - fail on missing googleKey', (t) => {
     });
 });
 
+test('Android variant update - success', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For Android Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'Android Variant',
+            type: 'android',
+            android: {
+                googleKey: 'abcd-1234',
+                'projectNumber': '1234567'
+            }
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            const variantToUpdate = {
+                android: {}
+            };
+            variantToUpdate.pushAppId = application.pushApplicationID;
+            variantToUpdate.variantId = variant.variantID;
+            variantToUpdate.name = 'New Name';
+            variantToUpdate.type = 'android';
+            variantToUpdate.android.googleKey = '54321';
+            variantToUpdate.android.projectNumber = variant.projectNumber;
+
+            return client.variants.update(variantToUpdate);
+        }).then((updatedVariant) => {
+            t.equal(updatedVariant.name, 'New Name', 'name should be New Name');
+            t.equal(updatedVariant.type, 'android', 'type should be android');
+            t.equal(updatedVariant.googleKey, '54321', 'googleKey should be 54321');
+            t.equal(updatedVariant.projectNumber, '1234567', 'projectNumber should be 1234567');
+
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
+test('Android variant update - failure - missing required field', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For Android Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'Android Variant',
+            type: 'android',
+            android: {
+                googleKey: 'abcd-1234',
+                'projectNumber': '1234567'
+            }
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            const variantToUpdate = {
+                android: {}
+            };
+            variantToUpdate.pushAppId = application.pushApplicationID;
+            variantToUpdate.variantId = variant.variantID;
+            variantToUpdate.name = 'New Name';
+            variantToUpdate.type = 'android';
+            variantToUpdate.android.projectNumber = variant.projectNumber;
+
+            return client.variants.update(variantToUpdate);
+        }).catch((err) => {
+            t.ok(err.googleKey, 'should have this error');
+            t.equal(err.googleKey, 'may not be null', 'may not be null');
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
 test('Android Variant find all - success', (t) => {
     const upsClient = adminClient(baseUrl, settings);
 
