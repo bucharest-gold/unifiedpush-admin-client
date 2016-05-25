@@ -190,3 +190,18 @@ test('reset application secret - sucess', (t) => {
         });
     });
 });
+
+test('reset application secret - failure - wrong pushApplicationID', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+        client.applications.create({name: 'Test Secret 1'}).then((application) => {
+            return client.applications.reset('NOT_THE_REAL_ID').catch((err) => {
+                t.equal(err, 'Could not find requested PushApplicationEntity', 'should error');
+                //clean up
+                client.applications.remove(application.pushApplicationID);
+                t.end();
+            });
+        });
+    });
+});
