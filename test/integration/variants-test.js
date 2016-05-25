@@ -12,6 +12,9 @@ const settings = {
     kcRealmName: 'master'
 };
 
+/**
+ iOS Variant Tests
+*/
 
 test('iOS variant create - success', (t) => {
     const upsClient = adminClient(baseUrl, settings);
@@ -99,12 +102,15 @@ test('iOS variant create - fail on cert/passphrase miss match', (t) => {
     });
 });
 
+/**
+ Android Variant Tests
+*/
 test('Android variant create - success', (t) => {
     const upsClient = adminClient(baseUrl, settings);
 
     upsClient.then((client) => {
     // First we need to create an application to add a variant to
-    client.applications.create({name: 'For iOS Variant'}).then((application) => {
+    client.applications.create({name: 'For Android Variant'}).then((application) => {
         const variantOptions = {
             pushAppId: application.pushApplicationID,
             name: 'Android Variant',
@@ -135,7 +141,7 @@ test('Android variant create - fail on missing googleKey', (t) => {
 
     upsClient.then((client) => {
     // First we need to create an application to add a variant to
-    client.applications.create({name: 'For iOS Variant'}).then((application) => {
+    client.applications.create({name: 'For Android Variant'}).then((application) => {
         const variantOptions = {
             pushAppId: application.pushApplicationID,
             name: 'Android Variant',
@@ -148,6 +154,92 @@ test('Android variant create - fail on missing googleKey', (t) => {
         client.variants.create(variantOptions).catch((err) => {
             t.ok(err.googleKey, 'should have this error');
             t.equal(err.googleKey, 'may not be null', 'may not be null');
+
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
+/**
+ ADM Variant Tests
+*/
+test('ADM variant create - success', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For ADM Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'ADM Variant',
+            type: 'adm',
+            adm: {
+                clientId: 'abcd-1234',
+                clientSecret: '1234567'
+            }
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            t.equal(variant.name, 'ADM Variant', 'name should be ADM Variant');
+            t.equal(variant.type, 'adm', 'type should be adm');
+            t.equal(variant.clientId, 'abcd-1234', 'clientId should be abcd-1234');
+            t.equal(variant.clientSecret, '1234567', 'clientSecret should be 1234567');
+        }).then(() => {
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
+test('ADM variant create - failure', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For ADM Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'ADM Variant',
+            type: 'adm',
+            adm: {
+            }
+        };
+
+        client.variants.create(variantOptions).catch((err) => {
+            t.ok(err.clientId, 'should have this error');
+            t.equal(err.clientId, 'may not be null', 'may not be null');
+
+            // now remove the thing we created,  we will test delete later on
+            client.applications.remove(application.pushApplicationID);
+            t.end();
+        });
+      });
+    });
+});
+
+/**
+ SimplePush Variant Tests
+*/
+test('SimplePush variant create - success', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For SimplePush Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'SimplePush Variant',
+            type: 'simplePush'
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            t.equal(variant.name, 'SimplePush Variant', 'name should be SimplePush Variantt');
+            t.equal(variant.type, 'simplePush', 'type should be simplePush');
         }).then(() => {
             // now remove the thing we created,  we will test delete later on
             client.applications.remove(application.pushApplicationID);
