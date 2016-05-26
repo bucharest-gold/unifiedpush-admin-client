@@ -76,6 +76,33 @@ This above example specifies the `type` as `android`, so we therefore must have 
 
 If the type was `adm` for Amazom push, then we would need an adm object with those specific options
 
+### Boostrapping
+
+There is also a convience method under applications called `client.applications.boostrap`.
+
+Use can create a Push Application with Variants in one shot.  Check the documentation for all available options, but here is a quick example:
+
+    const bootstrapper = {
+            pushApplicationName: 'Boostrap All',
+            androidVariantName: 'Android Name',
+            androidGoogleKey: '12345',
+            androidProjectNumber: '54321',
+            iosVariantName: 'iOS Name',
+            iosPassphrase: 'redhat',
+            iosCertificate: __dirname + '/../../build/test-ios-cert.p12',
+            simplePushVariantName: 'SimplePush Name',
+            windowsVariantName: 'Windows Name',
+            windowsType: 'wns',
+            windowsSid: '12345',
+            windowsClientSecret: 'secret',
+            admVariantName: 'ADM Name',
+            admClientId: '12345',
+            admClientSecret: 'secret'
+        };
+
+        client.applications.bootstrap(bootstrapper).then((app) => {
+          console.log(app);
+        });
 
 ### Notable Changes from 0.2.0 to 0.3.0
 
