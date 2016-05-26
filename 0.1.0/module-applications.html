@@ -143,6 +143,746 @@ A convience constant that holds the value of the different Device Types</a></li>
             
 <hr>
 <dt>
+    <h4 class="name" id="~bootstrap"><span class="type-signature">&lt;inner> </span>bootstrap(pushApp)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        A Convenience function to create a complete Push Application with a set of variants
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pushApp</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The push application object
+                <h6 class="method-params-label method-subparams-label">Properties</h6>
+                
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>pushApplicationName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The name of the Push Application</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>androidVariantName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Android Variant Name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>androidGoogleKey</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The Google Cloud Messaging Key. Required For Android</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>androidProjectNumber</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The Google Project Number</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>iosVariantName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">iOS Variant Name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>iosProduction</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">defaults to false - flag to indicate if a connection to Apples production or sandbox APNS server</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>iosPassphrase</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The APNs passphrase that is needed to establish a connection to any of Apple's APNs Push Servers.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>iosCertificate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Buffer</span>
+|
+
+<span class="param-type">Stream</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">the full location of the APNs certificate that is needed to establish a connection to any of Apple's APNs Push Servers.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>windowsType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">mpns or wns</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>windowsVariantName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Windows Variant Name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>windowsSid</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">*for wns only* - (Package security identifier) used to connect to the windows push notification services</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>windowsClientSecret</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">*for wns only* - The client secret (password) to connect to the windows push notification services</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>simplePushVariantName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">SimplePush Variant Name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>admVariantName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Amazon Variant Name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>admClientId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The client id to connect to the Amazon Device Messaging services</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>admClientSecret</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">The client secret (password) to connect to the Amazon Device Messaging services</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    A promise that resolves with the update Push Application
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">adminClient(baseUrl, settings)
+    .then((client) =&gt; {
+      client.applications.boostrap(pushApp)
+        .then((pushApplicaiton) =&gt; {
+          console.log(pushApplication); // {...}
+      });
+    });</pre>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
     <h4 class="name" id="~create"><span class="type-signature">&lt;inner> </span>create(pushApp)</h4>
     
     
@@ -1019,7 +1759,7 @@ A convience constant that holds the value of the different Device Types</a></li>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a>
 	
-		on 2016-05-26T10:05:26-04:00
+		on 2016-05-26T11:35:54-04:00
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
