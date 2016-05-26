@@ -286,3 +286,68 @@ test('Android Variant remove - error - wrong variantID', (t) => {
       });
     });
 });
+
+test('Android Variant Reset Secret - success', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For Android Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'Android Variant',
+            type: 'android',
+            android: {
+                googleKey: 'abcd-1234',
+                'projectNumber': '1234567'
+            }
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            const variantToReset = {
+                pushAppId: application.pushApplicationID,
+                type: 'android',
+                variantId: variant.variantID
+            };
+            return client.variants.reset(variantToReset).then((updatedVariant) => {
+                t.notEqual(updatedVariant.secret, variant.secret, 'secrets should be different');
+                // now remove the thing we created,  we will test delete later on
+                client.applications.remove(application.pushApplicationID);
+                t.end();
+            });
+        });
+      });
+    });
+});
+
+test('Android Variant Reset Secret - failure', (t) => {
+    const upsClient = adminClient(baseUrl, settings);
+
+    upsClient.then((client) => {
+    // First we need to create an application to add a variant to
+    client.applications.create({name: 'For Android Variant'}).then((application) => {
+        const variantOptions = {
+            pushAppId: application.pushApplicationID,
+            name: 'Android Variant',
+            type: 'android',
+            android: {
+                googleKey: 'abcd-1234',
+                'projectNumber': '1234567'
+            }
+        };
+
+        client.variants.create(variantOptions).then((variant) => {
+            const variantToReset = {
+                pushAppId: application.pushApplicationID,
+                type: 'android',
+                variantId: 'wrong_id'
+            };
+            return client.variants.reset(variantToReset).catch((error) => {
+                // now remove the thing we created,  we will test delete later on
+                client.applications.remove(application.pushApplicationID);
+                t.end();
+            });
+        });
+      });
+    });
+});
