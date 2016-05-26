@@ -76,10 +76,22 @@ This above example specifies the `type` as `android`, so we therefore must have 
 
 If the type was `adm` for Amazom push, then we would need an adm object with those specific options
 
-As of 0.2.0, only Android is documented and tested.
 
-Future releases will add the other Device Types
+### Notable Changes from 0.2.0 to 0.3.0
+
+* All Variant Types have been implemented
+* Integration Tests added
 
 ### Server Setup
 
-At the moment, you must enable "Direct Access Grants" on the UnifiedPush Server for this to work
+At the moment, you must enable "Direct Access Grants" on the UnifiedPush Server for this to work.
+
+### Note on Testing
+
+For testing we are using a slightly modified version of the UnifiedPush Server.  It is based off of this PR: https://github.com/aerogear/aerogear-unifiedpush-server/pull/677 and uses scenario 3.  The modified built war is located here:  https://github.com/lholmquist/aerogear-unified-push-server/releases/tag/0.0.1
+
+The reason for doing this allows us to more easily script the setup/testing process.  The only thing that PR really does is decouple keycloak and the UPS,  it does not change how the REST endpoints work, just how to authenticate to them.
+
+Once that PR is merged then we can point to the official release.
+
+Running the `build/start-server.sh` and `build/start-kc-server.sh` will setup both the unified push server and keycloak server for local testing
