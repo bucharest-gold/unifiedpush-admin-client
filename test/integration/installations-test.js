@@ -143,3 +143,51 @@ test('remove installation - fail', (t) => {
         });
     });
 });
+
+test('update installation - success', (t) => {
+    // First setup the project and variant we need
+    doBootstrapping().then((pushApplication) => {
+        return adminClient(baseUrl, settings).then((client) => {
+            return client.installations.find({variantId: pushApplication.variants[0].variantID}).then((installations) => {
+                const options = {
+                    variantId: pushApplication.variants[0].variantID,
+                    installation: installations[0]
+                };
+
+                options.installation.alias = 'NEW Alias';
+
+                return client.installations.update(options).then((updateInstallation) => {
+                    t.pass('should succeed, returns no content');
+                    return client.installations.find({variantId: pushApplication.variants[0].variantID, installationId: installations[0].id});
+                });
+            }).then((installation) => {
+                t.equal(installation.alias, 'NEW Alias', 'update alias should be there');
+                t.end();
+                return client.applications.remove(pushApplication.pushApplicationID);
+            });
+        });
+    });
+});
+
+test('update installation - fail', (t) => {
+    // First setup the project and variant we need
+    doBootstrapping().then((pushApplication) => {
+        return adminClient(baseUrl, settings).then((client) => {
+            return client.installations.find({variantId: pushApplication.variants[0].variantID}).then((installations) => {
+                const options = {
+                    variantId: pushApplication.variants[0].variantID,
+                    installation: installations[0]
+                };
+
+                options.installation.alias = 'NEW Alias';
+                options.installation.id = 'NOPE';
+
+                return client.installations.update(options).catch((err) => {
+                    t.pass('should error in the catch');
+                    t.end();
+                    return client.applications.remove(pushApplication.pushApplicationID);
+                });
+            });
+        });
+    });
+});
