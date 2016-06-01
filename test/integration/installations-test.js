@@ -111,3 +111,35 @@ test('find installations - just one installation - fail', (t) => {
         });
     });
 });
+
+test('remove installation - success', (t) => {
+    // First setup the project and variant we need
+    doBootstrapping().then((pushApplication) => {
+        return adminClient(baseUrl, settings).then((client) => {
+            return client.installations.find({variantId: pushApplication.variants[0].variantID}).then((installations) => {
+                return client.installations.remove({variantId: pushApplication.variants[0].variantID, installationId: installations[0].id}).then(() => {
+                    t.pass('should succeed');
+                    return;
+                });
+            }).then(() => {
+                t.end();
+                return client.applications.remove(pushApplication.pushApplicationID);
+            });
+        });
+    });
+});
+
+test('remove installation - fail', (t) => {
+    // First setup the project and variant we need
+    doBootstrapping().then((pushApplication) => {
+        return adminClient(baseUrl, settings).then((client) => {
+            return client.installations.find({variantId: pushApplication.variants[0].variantID}).then((installations) => {
+                return client.installations.remove({variantId: pushApplication.variants[0].variantID, installationId: 'WRONG_ID'}).catch(() => {
+                    t.pass('should be in the catch');
+                    t.end();
+                    return client.applications.remove(pushApplication.pushApplicationID);
+                });
+            });
+        });
+    });
+});
