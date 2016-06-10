@@ -191,3 +191,18 @@ test('update installation - fail', (t) => {
         });
     });
 });
+
+test('export installations - success', (t) => {
+    // First setup the project and variant we need
+    doBootstrapping().then((pushApplication) => {
+        return adminClient(baseUrl, settings).then((client) => {
+            return client.installations.exporter(pushApplication.variants[0].variantID).then((installations) => {
+                t.equal(Array.isArray(installations), true, 'returned installations should be an array');
+                t.equal(installations.length, devicesForImporting.length, 'should have the same length as the things we entered in');
+            }).then(() => {
+                t.end();
+                return client.applications.remove(pushApplication.pushApplicationID);
+            });
+        });
+    });
+});
