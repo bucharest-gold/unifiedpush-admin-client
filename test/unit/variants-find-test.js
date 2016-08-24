@@ -47,12 +47,10 @@ const adminClient = proxyquire('../../lib/unified-push-admin-client', {
 });
 
 test('test successful find of variants', (t) => {
-
   const upsClient = adminClient(baseUrl, settings);
 
   upsClient.then((client) => {
     t.equal(typeof client.variants.find, 'function', 'The client object should have a client.variants.find function');
-
 
     const variantOptions = {
       pushAppId: app.pushApplicationID,
@@ -75,7 +73,6 @@ test('test successful find of variants', (t) => {
 });
 
 test('test successful find of variant', (t) => {
-
   const upsClient = adminClient(baseUrl, settings);
 
   upsClient.then((client) => {
@@ -100,7 +97,6 @@ test('test successful find of variant', (t) => {
     });
   });
 });
-
 
 test('test error with a non 200 response code', (t) => {
   const upsClient = adminClient(baseUrl, settings);

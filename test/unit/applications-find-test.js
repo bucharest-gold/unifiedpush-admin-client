@@ -32,7 +32,6 @@ const adminClient = proxyquire('../../lib/unified-push-admin-client', {
 });
 
 test('test successful find of applications', (t) => {
-
   const upsClient = adminClient(baseUrl, settings);
 
   upsClient.then((client) => {
@@ -59,7 +58,6 @@ test('test successful find of 1 application', (t) => {
   const upsClient = adminClient(baseUrl, settings);
 
   upsClient.then((client) => {
-
     nock('http://127.0.0.1:8080')
       .matchHeader('authorization', 'Bearer access token')
       .get('/ag-push/rest/applications/12345')
@@ -74,7 +72,6 @@ test('test successful find of 1 application', (t) => {
   });
 });
 
-
 test('test error with a non 200 response code', (t) => {
   const adminClient = proxyquire('../../lib/unified-push-admin-client', {
     'keycloak-request-token': getToken
@@ -82,7 +79,6 @@ test('test error with a non 200 response code', (t) => {
   const upsClient = adminClient(baseUrl, settings);
 
   upsClient.then((client) => {
-
     nock('http://127.0.0.1:8080')
       .matchHeader('authorization', 'Bearer access token')
       .get('/ag-push/rest/applications/')

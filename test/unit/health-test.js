@@ -46,7 +46,6 @@ const adminClient = proxyquire('../../lib/unified-push-admin-client', {
 });
 
 test('test successful health endpoint', (t) => {
-
   const upsClient = adminClient(baseUrl, settings);
 
   upsClient.then((client) => {
@@ -65,7 +64,6 @@ test('test successful health endpoint', (t) => {
 });
 
 test('test error with health endpoint', (t) => {
-
   const upsClient = adminClient(baseUrl, settings);
 
   upsClient.then((client) => {
