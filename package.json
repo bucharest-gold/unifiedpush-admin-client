@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "tape test/**/*-test.js",
-    "lint": "eslint .",
+    "lint": "eslint index.js, example.js test/**/*.js lib/*.js",
     "prepublish": "./node_modules/nsp/bin/nsp check",
     "coverage": "./node_modules/.bin/istanbul cover tape -- test/**/*.js",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
