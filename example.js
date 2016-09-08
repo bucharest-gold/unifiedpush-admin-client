@@ -1,10 +1,10 @@
 'use strict';
 
-let adminClient = require('./');
+const adminClient = require('./');
 
-let baseUrl = 'http://127.0.0.1:8080/ag-push';
+const baseUrl = 'http://127.0.0.1:8080/ag-push';
 
-let settings = {
+const settings = {
   username: 'admin',
   password: 'admin'
 };

@@ -1,15 +1,27 @@
-[![Build Status](https://travis-ci.org/bucharest-gold/unifiedpush-admin-client.svg?branch=master)](https://travis-ci.org/bucharest-gold/unifiedpush-admin-client) [![Coverage Status](https://coveralls.io/repos/github/bucharest-gold/unifiedpush-admin-client/badge.svg?branch=master)](https://coveralls.io/github/bucharest-gold/unifiedpush-admin-client?branch=master)
+# Unified Push Admin Client
 
-## Unified Push Admin Client
+[![Coverage Status](https://coveralls.io/repos/github/bucharest-gold/unifiedpush-admin-client/badge.svg?branch=master)](https://coveralls.io/github/bucharest-gold/unifiedpush-admin-client?branch=master)
+[![Build Status](https://travis-ci.org/bucharest-gold/unifiedpush-admin-client.svg?branch=master)](https://travis-ci.org/bucharest-gold/unifiedpush-admin-client) 
+[![Known Vulnerabilities](https://snyk.io/test/npm/unifiedpush-admin-client/badge.svg)](https://snyk.io/test/npm/unifiedpush-admin-client) 
+[![dependencies Status](https://david-dm.org/bucharest-gold/unifiedpush-admin-client/status.svg)](https://david-dm.org/bucharest-gold/unifiedpush-admin-client)
+
+[![NPM](https://nodei.co/npm/unifiedpush-admin-client.png)](https://npmjs.org/package/unifiedpush-admin-client)
 
 A client for connecting to the AeroGear UnifiedPush servers admin REST API - https://aerogear.org/docs/specs/aerogear-unifiedpush-rest/#home
 
-## API Documentation
+|                 | Project Info  |
+| --------------- | ------------- |
+| License:        | Apache-2.0  |
+| Build:          | make  |
+| Documentation:  | http://bucharest-gold.github.io/unifiedpush-admin-client/  |
+| Issue tracker:  | https://github.com/bucharest-gold/unifiedpush-admin-client/issues  |
+| Engines:        | Node.js 4.x, 5.x, 6.x
 
-http://bucharest-gold.github.io/unifiedpush-admin-client/
+## Installation
 
+`npm install unifiedpush-admin-client -S`
 
-## Example
+## Usage
 
     'use strict';
 
@@ -76,6 +88,10 @@ This above example specifies the `type` as `android`, so we therefore must have 
 
 If the type was `adm` for Amazom push, then we would need an adm object with those specific options
 
+## API Documentation
+
+http://bucharest-gold.github.io/unifiedpush-admin-client/
+
 ### Boostrapping
 
 There is also a convience method under applications called `client.applications.boostrap`.
@@ -89,7 +105,7 @@ Use can create a Push Application with Variants in one shot.  Check the document
             androidProjectNumber: '54321',
             iosVariantName: 'iOS Name',
             iosPassphrase: 'redhat',
-            iosCertificate: __dirname + '/../../build/test-ios-cert.p12',
+            iosCertificate: __dirname + '/../../scripts/test-ios-cert.p12',
             simplePushVariantName: 'SimplePush Name',
             windowsVariantName: 'Windows Name',
             windowsType: 'wns',
@@ -121,4 +137,8 @@ The reason for doing this allows us to more easily script the setup/testing proc
 
 Once that PR is merged then we can point to the official release.
 
-Running the `build/start-server.sh` and `build/start-kc-server.sh` will setup both the unified push server and keycloak server for local testing
+Running the `scripts/start-server.sh` and `scripts/start-kc-server.sh` will setup both the unified push server and keycloak server for local testing
+
+## Contributing
+
+Please read the [contributing guide](./CONTRIBUTING.md)

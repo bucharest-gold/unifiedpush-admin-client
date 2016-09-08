@@ -28,7 +28,7 @@ test('iOS variant create - success', (t) => {
         name: 'iOS Variant',
         type: 'ios',
         ios: {
-          certificate: path.join(__dirname, '/../../build/test-ios-cert.p12'),
+          certificate: path.join(__dirname, '/../../scripts/test-ios-cert.p12'),
           passphrase: 'redhat'
         }
       };
@@ -57,7 +57,7 @@ test('iOS variant create with cert as a read stream - success', (t) => {
         name: 'iOS Variant',
         type: 'ios',
         ios: {
-          certificate: fs.createReadStream(path.join(__dirname, '/../../build/test-ios-cert.p12')),
+          certificate: fs.createReadStream(path.join(__dirname, '/../../scripts/test-ios-cert.p12')),
           passphrase: 'redhat'
         }
       };
@@ -86,7 +86,7 @@ test('iOS variant create - fail on cert/passphrase miss match', (t) => {
         name: 'iOS Variant',
         type: 'ios',
         ios: {
-          certificate: path.join(__dirname, '/../../build/test-ios-cert.p12'),
+          certificate: path.join(__dirname, '/../../scripts/test-ios-cert.p12'),
           passphrase: 'wrong'
         }
       };
@@ -114,7 +114,7 @@ test('iOS variant update - success', (t) => {
         name: 'iOS Variant',
         type: 'ios',
         ios: {
-          certificate: path.join(__dirname, '/../../build/test-ios-cert.p12'),
+          certificate: path.join(__dirname, '/../../scripts/test-ios-cert.p12'),
           passphrase: 'redhat'
         }
       };
@@ -126,7 +126,7 @@ test('iOS variant update - success', (t) => {
           name: 'Updated iOS Variant',
           type: 'ios',
           ios: {
-            certificate: path.join(__dirname, '/../../build/test-ios-cert.p12'),
+            certificate: path.join(__dirname, '/../../scripts/test-ios-cert.p12'),
             passphrase: 'redhat',
             production: 'true'
           }
@@ -154,7 +154,7 @@ test('iOS variant update - success as a read stream', (t) => {
         name: 'iOS Variant',
         type: 'ios',
         ios: {
-          certificate: fs.createReadStream(path.join(__dirname, '/../../build/test-ios-cert.p12')),
+          certificate: fs.createReadStream(path.join(__dirname, '/../../scripts/test-ios-cert.p12')),
           passphrase: 'redhat'
         }
       };
@@ -166,7 +166,7 @@ test('iOS variant update - success as a read stream', (t) => {
           name: 'Updated iOS Variant',
           type: 'ios',
           ios: {
-            certificate: fs.createReadStream(path.join(__dirname, '/../../build/test-ios-cert.p12')),
+            certificate: fs.createReadStream(path.join(__dirname, '/../../scripts/test-ios-cert.p12')),
             passphrase: 'redhat',
             production: 'true'
           }
@@ -194,7 +194,7 @@ test('iOS variant update - failure with wrong passphrase', (t) => {
         name: 'iOS Variant',
         type: 'ios',
         ios: {
-          certificate: fs.createReadStream(path.join(__dirname, '/../../build/test-ios-cert.p12')),
+          certificate: fs.createReadStream(path.join(__dirname, '/../../scripts/test-ios-cert.p12')),
           passphrase: 'not right'
         }
       };
@@ -206,7 +206,7 @@ test('iOS variant update - failure with wrong passphrase', (t) => {
           name: 'Updated iOS Variant',
           type: 'ios',
           ios: {
-            certificate: path.join(__dirname, '/../../build/test-ios-cert.p12'),
+            certificate: path.join(__dirname, '/../../scripts/test-ios-cert.p12'),
             passphrase: 'redhat',
             production: 'true'
           }
@@ -234,7 +234,7 @@ test('iOS variant find all - success', (t) => {
         name: 'iOS Variant',
         type: 'ios',
         ios: {
-          certificate: path.join(__dirname, '/../../build/test-ios-cert.p12'),
+          certificate: path.join(__dirname, '/../../scripts/test-ios-cert.p12'),
           passphrase: 'redhat'
         }
       };
@@ -267,7 +267,7 @@ test('iOS variant find one with variant ID - success', (t) => {
         name: 'iOS Variant',
         type: 'ios',
         ios: {
-          certificate: path.join(__dirname, '/../../build/test-ios-cert.p12'),
+          certificate: path.join(__dirname, '/../../scripts/test-ios-cert.p12'),
           passphrase: 'redhat'
         }
       };
@@ -302,7 +302,7 @@ test('iOS variant remove - success', (t) => {
         name: 'iOS Variant',
         type: 'ios',
         ios: {
-          certificate: path.join(__dirname, '/../../build/test-ios-cert.p12'),
+          certificate: path.join(__dirname, '/../../scripts/test-ios-cert.p12'),
           passphrase: 'redhat'
         }
       };
@@ -334,7 +334,7 @@ test('iOS variant remove - error - wrong variantID', (t) => {
         name: 'iOS Variant',
         type: 'ios',
         ios: {
-          certificate: path.join(__dirname, '/../../build/test-ios-cert.p12'),
+          certificate: path.join(__dirname, '/../../scripts/test-ios-cert.p12'),
           passphrase: 'redhat'
         }
       };

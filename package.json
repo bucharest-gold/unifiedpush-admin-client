@@ -4,7 +4,7 @@
   "description": "Admin REST client for the AeroGear UnifiedPush Server",
   "main": "index.js",
   "scripts": {
-    "test": "tape test/**/*-test.js",
+    "test": "tape test/**/*-test.js | tap-spec",
     "lint": "eslint index.js, example.js test/**/*.js lib/*.js",
     "prepublish": "./node_modules/nsp/bin/nsp check",
     "coverage": "./node_modules/.bin/istanbul cover tape -- test/**/*.js",
@@ -52,6 +52,7 @@
     "nock": "^8.0.0",
     "nsp": "^2.3.3",
     "proxyquire": "^1.7.9",
+    "tap-spec": "^4.1.1",
     "tape": "^4.5.1",
     "unifiedpush-registration-client": "^0.2.0"
   }

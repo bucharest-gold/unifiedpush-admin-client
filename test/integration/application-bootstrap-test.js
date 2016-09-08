@@ -59,7 +59,7 @@ test('test application bootstrap - with just ios - success', (t) => {
       pushApplicationName: 'Boostrap 1',
       iosVariantName: 'iOS Name',
       iosPassphrase: 'redhat',
-      iosCertificate: path.join(__dirname, '/../../build/test-ios-cert.p12')
+      iosCertificate: path.join(__dirname, '/../../scripts/test-ios-cert.p12')
     };
 
     client.applications.bootstrap(bootstrapper).then((app) => {
@@ -165,7 +165,7 @@ test('test application bootstrap - with all variants - success', (t) => {
       androidProjectNumber: '54321',
       iosVariantName: 'iOS Name',
       iosPassphrase: 'redhat',
-      iosCertificate: path.join(__dirname, '/../../build/test-ios-cert.p12'),
+      iosCertificate: path.join(__dirname, '/../../scripts/test-ios-cert.p12'),
       simplePushVariantName: 'SimplePush Name',
       windowsVariantName: 'Windows Name',
       windowsType: 'wns',

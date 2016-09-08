@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. build/version.sh
+. scripts/version.sh
 
 function waitForServer {
   # Give the server some time to start up. Look for a well-known
@@ -35,6 +35,6 @@ fi
 $KEYCLOAK/bin/add-user-keycloak.sh -r master -u admin -p admin
 
 # Start the server
-$KEYCLOAK/bin/standalone.sh -Djava.net.preferIPv4Stack=true -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=build/ups-setup-for-test.json -Dkeycloak.migration.strategy=OVERWRITE_EXISTING > keycloak.log 2>&1 &
+$KEYCLOAK/bin/standalone.sh -Djava.net.preferIPv4Stack=true -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=scripts/ups-setup-for-test.json -Dkeycloak.migration.strategy=OVERWRITE_EXISTING > keycloak.log 2>&1 &
 
 waitForServer

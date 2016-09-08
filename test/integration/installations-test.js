@@ -5,7 +5,7 @@ const path = require('path');
 const adminClient = require('../../');
 
 const registrationClient = require('unifiedpush-registration-client');
-const devicesForImporting = require(path.join(__dirname, '/../../build/importer-test.json'));
+const devicesForImporting = require(path.join(__dirname, '/../../scripts/importer-test.json'));
 
 const baseUrl = 'http://localhost:8082/ag-push';
 const settings = {
