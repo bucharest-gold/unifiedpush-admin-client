@@ -28,6 +28,14 @@
   "engines": {
     "node": ">= 4.0.0"
   },
+  "files": [
+    "package.json",
+    "README.md",
+    "LICENSE",
+    "index.js",
+    "example.js",
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "bucharest-gold/unifiedpush-admin-client"
