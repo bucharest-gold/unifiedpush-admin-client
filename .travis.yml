@@ -6,6 +6,7 @@ node_js:
   - "5"
   - "6"
 before_script:
+  - npm install -g szero
   - ./scripts/start-kc-server.sh
   - ./scripts/start-server.sh
 script:
