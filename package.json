@@ -10,7 +10,7 @@
     "coverage": "./node_modules/.bin/istanbul cover tape -- test/**/*.js",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
     "docs": "./node_modules/.bin/jsdoc --verbose -d docs -t ./node_modules/ink-docstrap/template -R README.md index.js ./lib/*.js",
-    "dependencyCheck": "szero . --ci=true"
+    "dependencyCheck": "szero . --ci"
   },
   "keywords": [
     "AeroGear",
